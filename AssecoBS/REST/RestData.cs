@@ -46,7 +46,7 @@ namespace AssecoBS.REST
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
                     var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseBody);
-                    _logger.LogInformation("Pobrano token");
+                    _logger.LogInformation("Pobrano token"); 
                     return tokenResponse.access_token;
 
                 }
