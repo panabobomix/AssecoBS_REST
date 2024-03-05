@@ -1,0 +1,43 @@
+﻿@page "/"
+@using AssecoBS.REST
+
+@inject RestData RestDataService
+
+<PageTitle>Home</PageTitle>
+
+<h1>XML DATA</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Path</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var path in paths)
+        {
+            <tr>
+                <td>@path</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    List<string> paths = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchPaths();
+    }
+
+    private async Task FetchPaths()
+    {
+        var token = await RestDataService.DownloadToken();
+        if (!string.IsNullOrEmpty(token))
+        {
+            var path = RestDataService.GetXMLData(token);
+            paths = await path;
+        }
+    }
+}
