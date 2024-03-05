@@ -1,10 +1,10 @@
 name: CI
 on:
   push:
-    branches: [ master-pipeline ]
+    branches: [ master ]
   pull_request:
     branches:
-      - master-pipeline
+      - master
   workflow_dispatch:
 jobs:
   build:
